@@ -6,7 +6,7 @@
 /*   By: bbathe <bbathe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:21:01 by bbathe            #+#    #+#             */
-/*   Updated: 2021/09/20 16:48:28 by bbathe           ###   ########.fr       */
+/*   Updated: 2021/10/08 15:07:47 by bbathe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	cur_init(t_cur *cur);
 void	f_init(t_f *f);
 void	draw(t_f *f);
 int		mouse_hook(int button, int x, int y, t_f *f);
-void	julia(t_f *f);
+void	julia(t_f *f, double p, double q);
 int		julia_set_iter(t_cur *cur, t_z *z);
 int		julia_motion(int x, int y, t_f *f);
 int		mandelbrot_set_iter(t_cur *cur, t_z *z);
@@ -88,6 +88,10 @@ int		get_color(t_f *f);
 void	key_hook_color(int key_code, t_f *f);
 int		key_hook(int key_code, t_f *f);
 void	fractal_type(int argc, char **argv, t_f *f);
+double	double_atoi(char *str);
+void	clean_window(t_f *f);
+void	fractal_type_julia(int argc, char **argv, t_f *f);
+int		if_number(char *s);
 
 # define SIZE	1080
 

@@ -6,7 +6,7 @@
 /*   By: bbathe <bbathe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:06:07 by bbathe            #+#    #+#             */
-/*   Updated: 2021/09/17 19:19:40 by bbathe           ###   ########.fr       */
+/*   Updated: 2021/10/07 18:01:53 by bbathe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	cur_init(t_cur *cur)
 {
 	cur->center_x = SIZE / 2;
 	cur->center_y = SIZE / 2;
-	cur->radius = 2;
 	cur->k = 0;
 	cur->color = create_trgb(0, 0, 128);
 	cur->press_c = 0;

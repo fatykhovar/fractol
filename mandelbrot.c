@@ -6,7 +6,7 @@
 /*   By: bbathe <bbathe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:08:25 by bbathe            #+#    #+#             */
-/*   Updated: 2021/09/20 16:44:11 by bbathe           ###   ########.fr       */
+/*   Updated: 2021/10/07 18:02:09 by bbathe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	mandelbrot_set_iter(t_cur *cur, t_z *z)
 	z_y = 0;
 	cur->p = z->x;
 	cur->q = z->y;
-	while (z_x * z_x + z_y * z_y <= cur->radius * cur->radius)
+	while (z_x * z_x + z_y * z_y <= 4)
 	{
 		if (cur->k == 200)
 			return (1);

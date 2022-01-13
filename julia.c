@@ -6,7 +6,7 @@
 /*   By: bbathe <bbathe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:07:17 by bbathe            #+#    #+#             */
-/*   Updated: 2021/09/20 16:40:53 by bbathe           ###   ########.fr       */
+/*   Updated: 2021/10/07 18:43:56 by bbathe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	julia_set_iter(t_cur *cur, t_z *z)
 	cur->k = 0;
 	z_x = z->x;
 	z_y = z->y;
-	while (z_x * z_x + z_y * z_y <= cur->radius * cur->radius)
+	while (z_x * z_x + z_y * z_y <= 4)
 	{
 		if (cur->k == 200)
 			return (1);
@@ -45,10 +45,10 @@ int	julia_motion(int x, int y, t_f *f)
 	return (0);
 }
 
-void	julia(t_f *f)
+void	julia(t_f *f, double p, double q)
 {
 	cur_init(f->cur);
-	f->cur->p = 0.36;
-	f->cur->q = 0.36;
+	f->cur->p = p;
+	f->cur->q = q;
 	draw(f);
 }

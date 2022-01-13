@@ -5,26 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbathe <bbathe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/17 18:20:33 by bbathe            #+#    #+#             */
-/*   Updated: 2021/09/20 16:45:34 by bbathe           ###   ########.fr       */
+/*   Created: 2021/10/08 14:34:53 by bbathe            #+#    #+#             */
+/*   Updated: 2021/10/08 15:28:40 by bbathe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractal.h"
 #include "key_macos.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
 void	draw(t_f *f)
 {
+	double	step;
+
+	clean_window(f);
 	f->cur->x = 0;
 	f->z->x = f->cur->arrow_x - f->cur->size;
+	step = 2 * f->cur->size / SIZE;
 	while (f->cur->x < SIZE)
 	{
 		f->cur->y = 0;
@@ -37,23 +33,36 @@ void	draw(t_f *f)
 			else
 				my_mlx_pixel_put(&f->img, f->cur->x, f->cur->y, get_color(f));
 			f->cur->y++;
-			f->z->y -= 2 * f->cur->size / SIZE;
+			f->z->y -= step;
 		}
 		f->cur->x++;
-		f->z->x += 2 * f->cur->size / SIZE;
+		f->z->x += step;
 	}
 	mlx_put_image_to_window(f->mlx, f->window, f->img.img, 0, 0);
 }
 
+void	fractal_type_julia(int argc, char **argv, t_f *f)
+{
+	f_init(f);
+	f->is_julia = 1;
+	f->set_iter = *julia_set_iter;
+	if (argc == 2)
+		julia(f, 0.36, 0.36);
+	else if (argc == 3 && if_number(argv[2]))
+		julia(f, double_atoi(argv[2]), 0.36);
+	else if (argc == 4 && if_number(argv[2]) && if_number(argv[3]))
+		julia(f, double_atoi(argv[2]), double_atoi(argv[3]));
+	else
+	{
+		write(1, "Available parameters: \njulia p q\nmandelbrot\ntricorn\n", 53);
+		exit(0);
+	}
+}
+
 void	fractal_type(int argc, char **argv, t_f *f)
 {
-	if (argc == 2 && !ft_strncmp(argv[1], "julia"))
-	{
-		f_init(f);
-		f->is_julia = 1;
-		f->set_iter = *julia_set_iter;
-		julia(f);
-	}
+	if (argc > 1 && argc < 5 && !ft_strncmp(argv[1], "julia"))
+		fractal_type_julia(argc, argv, f);
 	else if (argc == 2 && !ft_strncmp(argv[1], "mandelbrot"))
 	{
 		f_init(f);
@@ -68,7 +77,7 @@ void	fractal_type(int argc, char **argv, t_f *f)
 	}
 	else
 	{
-		write(1, "Available parameters: \njulia\nmandelbrot\ntricorn\n", 49);
+		write(1, "Available parameters: \njulia p q\nmandelbrot\ntricorn\n", 53);
 		exit(0);
 	}
 }

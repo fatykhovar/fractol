@@ -1,4 +1,6 @@
-SRCS =		fractal.c julia.c mandelbrot.c ft_strncmp.c fractal_inits.c colors.c tricorn.c hooks.c
+SRCS =		fractal.c julia.c mandelbrot.c ft_strncmp.c\
+			fractal_inits.c colors.c tricorn.c hooks.c\
+			double_atoi.c fractal_draw_utils.c
 OBJS =		$(SRCS:.c=.o)
 NAME =		fractol
 HEADERS =   fractal.h key_macos.h
@@ -7,10 +9,7 @@ MINILIBX = $(MINILIBX_DIRECTORY)libmlx.a
 MINILIBX_DIRECTORY = ./mlx/
 MINILIBX_HEADERS = $(MINILIBX_DIRECTORY)
 
-INCLUDES =	./
 GCC =		gcc
-ARRC =		ar rc
-RLIB =		ranlib
 RM =		rm -f
 CFLAGS =	-Wall -Wextra -Werror
 
